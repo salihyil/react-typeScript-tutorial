@@ -7,19 +7,30 @@ import { useTodoContext } from '../../contexts/todo';
 const TodoList: React.FC = () => {
   const { todos } = useTodoContext();
 
-  console.log("TodoList");
-  
-
   return (
-    <div className="todos">
-      {todos.map((todo) => {
-        return (
-          <SingleTodo
-            key={todo.id}
-            todo={todo}
-          />
-        );
-      })}
+    <div className="container">
+      <div className="todos">
+        <span className="todos__heading">Active Task</span>
+        {todos.map((todo) => {
+          return (
+            <SingleTodo
+              key={todo.id}
+              todo={todo}
+            />
+          );
+        })}
+      </div>
+      <div className="todos remove">
+        <span className="todos__heading">Completed Tasks</span>
+        {todos.map((todo) => {
+          return (
+            <SingleTodo
+              key={todo.id}
+              todo={todo}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
