@@ -11,20 +11,25 @@ import { Todo } from '../models/todo';
 interface TodoProviderProps {
   children: React.ReactNode;
 }
+type Dispatch = (action: TodoActions) => void;
 interface IValue {
   todos: Todo[];
   dispatch: Dispatch;
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
+  completedTodos: Todo[];
+  setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
-
-type Dispatch = (action: TodoActions) => void;
 
 const TodoContext = createContext<IValue | undefined>(undefined);
 
 function TodoProvider({ children }: TodoProviderProps) {
   const [todos, dispatch] = useReducer(TodoReducer, initialState);
   const [todo, setTodo] = useState<string>('');
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>(todos);
+
+  console.log('todos:::', todos);
+  console.log('completedTodos:', completedTodos);
 
   const contextData = useMemo(
     () => ({
@@ -32,8 +37,10 @@ function TodoProvider({ children }: TodoProviderProps) {
       dispatch,
       todo,
       setTodo,
+      completedTodos,
+      setCompletedTodos,
     }),
-    [todo, todos]
+    [todo, todos, completedTodos]
   );
 
   return (

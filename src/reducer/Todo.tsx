@@ -7,13 +7,15 @@ export enum TodoActionType {
   REMOVE = 'REMOVE',
   DONE = 'DONE',
   EDIT = 'EDIT',
+  DROP = 'DROP',
 }
 
 export type TodoActions =
   | { type: TodoActionType.ADD; payload: string }
   | { type: TodoActionType.REMOVE; payload: number }
   | { type: TodoActionType.DONE; payload: number }
-  | { type: TodoActionType.EDIT; payload: { id: number; editTodo: string } };
+  | { type: TodoActionType.EDIT; payload: { id: number; editTodo: string } }
+  | { type: TodoActionType.DROP; payload: Todo[] };
 
 export const TodoReducer = (state: Todo[], action: TodoActions) => {
   switch (action.type) {
@@ -39,7 +41,8 @@ export const TodoReducer = (state: Todo[], action: TodoActions) => {
           ? { ...todo, todo: action.payload.editTodo }
           : todo
       );
-
+    case TodoActionType.DROP:
+      return [...action.payload];
     default:
       return state;
   }
