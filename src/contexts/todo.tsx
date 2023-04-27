@@ -28,9 +28,6 @@ function TodoProvider({ children }: TodoProviderProps) {
   const [todo, setTodo] = useState<string>('');
   const [completedTodos, setCompletedTodos] = useState<Todo[]>(todos);
 
-  console.log('todos:::', todos);
-  console.log('completedTodos:', completedTodos);
-
   const contextData = useMemo(
     () => ({
       todos,

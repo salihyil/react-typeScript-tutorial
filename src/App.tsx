@@ -49,9 +49,6 @@ const App: React.FC = () => {
     } else {
       complete.splice(destination.index, 0, add);
     }
-    
-    console.log('active', active);
-    console.log('complete', complete);
 
     setCompletedTodos(complete);
     dispatch({ type: TodoActionType.DROP, payload: active });
